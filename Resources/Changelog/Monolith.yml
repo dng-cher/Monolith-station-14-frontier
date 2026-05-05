@@ -20812,3 +20812,10 @@ Entries:
   id: 2292
   time: '2026-05-05T17:17:34.0000000+00:00'
   url: https://github.com/Monolith-Station/Monolith/pull/3949
+- author: Corrupt142
+  changes:
+    - type: Tweak
+      message: modified gun layout on the serkesh to be less OP
+  id: 2293
+  time: '2026-05-05T17:22:55.0000000+00:00'
+  url: https://github.com/Monolith-Station/Monolith/pull/3942
