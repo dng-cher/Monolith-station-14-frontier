@@ -21152,3 +21152,16 @@ Entries:
   id: 2331
   time: '2026-05-18T07:33:22.0000000+00:00'
   url: https://github.com/Monolith-Station/Monolith/pull/4009
+- author: IronmoonHeathen
+  changes:
+    - type: Add
+      message: >-
+        Added sidearm category for PDV and TSF. Roughly based on roundstart
+        obtainable uplink item or existing loadout weapon option
+    - type: Tweak
+      message: >-
+        Hawk pistol is moved from PDV primary to PDV command secondary. Making
+        it possible for them to also start with a longarm option now
+  id: 2332
+  time: '2026-05-18T10:20:07.0000000+00:00'
+  url: https://github.com/Monolith-Station/Monolith/pull/4013
