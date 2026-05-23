@@ -21318,3 +21318,12 @@ Entries:
   id: 2348
   time: '2026-05-23T10:38:00.0000000+00:00'
   url: https://github.com/Monolith-Station/Monolith/pull/4047
+- author: Svarshik
+  changes:
+    - type: Add
+      message: Added T1 PDV ship - "WEN Garm", with GPOL bombing armament.
+    - type: Remove
+      message: Hourglass-type hull no longer being produced.
+  id: 2349
+  time: '2026-05-23T13:31:39.0000000+00:00'
+  url: https://github.com/Monolith-Station/Monolith/pull/3985
