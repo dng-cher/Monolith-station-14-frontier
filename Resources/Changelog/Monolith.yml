@@ -21327,3 +21327,10 @@ Entries:
   id: 2349
   time: '2026-05-23T13:31:39.0000000+00:00'
   url: https://github.com/Monolith-Station/Monolith/pull/3985
+- author: NazrinNya
+  changes:
+    - type: Tweak
+      message: RUBICONs and Toveks are no longer anchorable.
+  id: 2350
+  time: '2026-05-24T05:20:23.0000000+00:00'
+  url: https://github.com/Monolith-Station/Monolith/pull/4041
