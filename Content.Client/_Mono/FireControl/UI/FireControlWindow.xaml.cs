@@ -11,15 +11,14 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using System.Runtime.CompilerServices; // Forge-Change
 
 namespace Content.Client._Mono.FireControl.UI;
 
 [GenerateTypedNameReferences]
 public sealed partial class FireControlWindow : FancyWindow
 {
-    private IEntityManager _entityManager = default!;
-    private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public FireControlNavControl Radar => NavRadar;
     public Action? OnServerRefresh;
