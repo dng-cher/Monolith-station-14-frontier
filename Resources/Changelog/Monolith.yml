@@ -21347,3 +21347,10 @@ Entries:
   id: 2351
   time: '2026-05-24T17:53:42.0000000+00:00'
   url: https://github.com/Monolith-Station/Monolith/pull/4049
+- author: Mapleflavoureds
+  changes:
+    - type: Remove
+      message: Volta, RD suit and CE suit are no longer rad immune
+  id: 2352
+  time: '2026-05-25T02:49:03.0000000+00:00'
+  url: https://github.com/Monolith-Station/Monolith/pull/4051
