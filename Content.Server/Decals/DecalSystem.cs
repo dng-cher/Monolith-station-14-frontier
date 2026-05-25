@@ -56,6 +56,8 @@ namespace Content.Server.Decals
             new(() => new DefaultObjectPool<Dictionary<NetEntity, HashSet<Vector2i>>>( // Forge-Change
                 new DefaultPooledObjectPolicy<Dictionary<NetEntity, HashSet<Vector2i>>>(), 64)); // Forge-Change
 
+        private EntityQuery<DecalGridComponent> _decalGridQuery; // Mono
+
         public override void Initialize()
         {
             base.Initialize();
@@ -74,6 +76,8 @@ namespace Content.Server.Decals
             SubscribeLocalEvent<PostGridSplitEvent>(OnGridSplit);
 
             Subs.CVar(_conf, CVars.NetPVS, OnPvsToggle, true);
+
+            _decalGridQuery = GetEntityQuery<DecalGridComponent>(); // Mono
         }
 
         private void OnPvsToggle(bool value)
