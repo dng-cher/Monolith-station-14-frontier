@@ -263,6 +263,7 @@
     - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
       state: generic_panel_open
   - type: FireControlConsole
+  - type: ShuttleConsoleLock # Forge-Change
   - type: ShipNpcTarget
     needPower: true
   - type: TargetSeekingTarget
