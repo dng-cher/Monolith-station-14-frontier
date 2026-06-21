@@ -21709,3 +21709,10 @@ Entries:
   id: 2392
   time: '2026-06-21T17:53:23.0000000+00:00'
   url: https://github.com/Monolith-Station/Monolith/pull/3757
+- author: Corrupt142
+  changes:
+    - type: Tweak
+      message: Remapped commielot from the ground up and turned it into a PMC hub
+  id: 2393
+  time: '2026-06-21T18:53:03.0000000+00:00'
+  url: https://github.com/Monolith-Station/Monolith/pull/3984
