@@ -42,6 +42,7 @@ public sealed partial class ShipSteeringSystem : EntitySystem
 
     private List<Entity<MapGridComponent>> _avoidGrids = new();
     private HashSet<Entity<ShipWeaponProjectileComponent>> _avoidProjs = new();
+    private List<(EntityUid Uid, bool IsGrid)> _avoidPotentialEnts = new();
     private List<ObstacleCandidate> _avoidEnts = new();
 
     // collision evasion input consideration sectors: 24 outer, 12 inner, 1 zero-input
@@ -154,7 +155,7 @@ public sealed partial class ShipSteeringSystem : EntitySystem
             FrameTime = args.FrameTime
         };
 
-        args.Input = ProcessMovement(context, config, ent.Comp, ref ent.Comp.RotationCompensation);
+        args.Input = ProcessMovement(ref context, config);
     }
 
     /// <summary>
@@ -227,10 +228,8 @@ public sealed partial class ShipSteeringSystem : EntitySystem
     /// Handle getting our inputs.
     /// </summary>
     private ShuttleInput ProcessMovement(
-        in SteeringContext ctx,
-        in SteeringConfig config,
-        ShipSteererComponent comp,
-        ref float rotationCompensation)
+        ref SteeringContext ctx,
+        in SteeringConfig config)
     {
         // check our braking power
         var brakeCtx = GetBrakeContext(ref ctx, config.MaxArrivedVel);
@@ -238,8 +237,8 @@ public sealed partial class ShipSteeringSystem : EntitySystem
         var navVec = CalculateNavigationVector(ref ctx, brakeCtx);
 
         // check obstacle avoidance
-        ScanForObstacles(ctx, config, brakeCtx, comp);
-        var avoidanceRes = CalculateAvoidanceVector(ctx, config, brakeCtx, navVec);
+        ScanForObstacles(ref ctx, config, brakeCtx);
+        var avoidanceRes = CalculateAvoidanceVector(ref ctx, config, brakeCtx, navVec);
         var avoidanceVec = avoidanceRes.AvoidVec;
 
         // use avoidance vector if available or proceed with thrust as normal
@@ -289,71 +288,54 @@ public sealed partial class ShipSteeringSystem : EntitySystem
         return new BrakeContext(brakeAccel, brakePath, leftoverBrakePath);
     }
 
-    private void ScanForObstacles(in SteeringContext ctx, in SteeringConfig config, in BrakeContext brake, ShipSteererComponent comp)
+    private void ScanForObstacles(ref SteeringContext ctx, in SteeringConfig config, in BrakeContext brake)
     {
-        // Throttle the broad broadphase queries — they dominate scan cost on busy maps.
-        // AABBs of cached candidates are refreshed every tick below, so avoidance keeps up with motion.
-        comp.ScanAccumulator += ctx.FrameTime;
-        var doBroadScan = comp.ScanAccumulator >= comp.ScanInterval || comp.CachedScanCandidates.Count == 0;
+        var SearchBuffer = config.SearchBuffer;
+        var ScanDistanceBuffer = config.ScanDistanceBuffer;
+        var ProjectileSearchBounds = config.ProjectileSearchBounds;
 
-        if (doBroadScan)
-        {
-            comp.ScanAccumulator = 0f;
+        var shipPosVec = ctx.ShipPos.Position;
+        var shipVel = ctx.ShipBody.LinearVelocity;
+        var shipAABB = ctx.ShipGrid.LocalAABB;
+        var velAngle = ctx.ShipBody.LinearVelocity.ToWorldAngle();
 
-            var SearchBuffer = config.SearchBuffer;
-            var ScanDistanceBuffer = config.ScanDistanceBuffer;
-            var ProjectileSearchBounds = config.ProjectileSearchBounds;
+        var scanDistance = brake.BrakeAccel == 0f ?
+                               config.MaxObstructorDistance
+                               : MathF.Min(config.MaxObstructorDistance, brake.BrakePath * 4f);
+        scanDistance += shipAABB.Size.Length() * 0.5f + ScanDistanceBuffer;
 
-            var shipPosVec = ctx.ShipPos.Position;
-            var shipAABB = ctx.ShipGrid.LocalAABB;
-            var velAngle = ctx.ShipBody.LinearVelocity.ToWorldAngle();
+        var scanBoundsLocal = shipAABB
+            .Enlarged(SearchBuffer)
+            .ExtendToContain(new Vector2(0, scanDistance));
 
-            var scanDistance = brake.BrakeAccel == 0f ?
-                                   config.MaxObstructorDistance
-                                   : MathF.Min(config.MaxObstructorDistance, brake.BrakePath * 4f);
-            scanDistance += shipAABB.Size.Length() * 0.5f + ScanDistanceBuffer;
+        var scanBounds = new Box2(scanBoundsLocal.BottomLeft + shipPosVec, scanBoundsLocal.TopRight + shipPosVec);
+        var scanBoundsWorld = new Box2Rotated(scanBounds, velAngle - new Angle(Math.PI), shipPosVec);
 
-            var scanBoundsLocal = shipAABB
-                .Enlarged(SearchBuffer)
-                .ExtendToContain(new Vector2(0, scanDistance));
+        // query for everything nearby
+        _avoidGrids.Clear();
+        if (config.AvoidCollisions)
+            _mapMan.FindGridsIntersecting(ctx.ShipPos.MapId, scanBoundsWorld, ref _avoidGrids, approx: true, includeMap: false);
 
-            var scanBounds = new Box2(scanBoundsLocal.BottomLeft + shipPosVec, scanBoundsLocal.TopRight + shipPosVec);
-            var scanBoundsWorld = new Box2Rotated(scanBounds, velAngle - new Angle(Math.PI), shipPosVec);
+        _avoidProjs.Clear();
+        if (config.AvoidProjectiles)
+            _avoidProjs = _lookup.GetEntitiesInRange<ShipWeaponProjectileComponent>(
+                ctx.ShipPos, ProjectileSearchBounds, LookupFlags.Approximate | LookupFlags.Dynamic | LookupFlags.Sensors);
 
-            // query for everything nearby
-            _avoidGrids.Clear();
-            if (config.AvoidCollisions)
-                _mapMan.FindGridsIntersecting(ctx.ShipPos.MapId, scanBoundsWorld, ref _avoidGrids, approx: true, includeMap: false);
+        // pool all queried ents
+        _avoidPotentialEnts.Clear();
+        foreach (var grid in _avoidGrids)
+            _avoidPotentialEnts.Add((grid, true));
 
-            _avoidProjs.Clear();
-            if (config.AvoidProjectiles)
-                _lookup.GetEntitiesInRange(
-                    ctx.ShipPos, ProjectileSearchBounds, _avoidProjs,
-                    LookupFlags.Approximate | LookupFlags.Dynamic | LookupFlags.Sensors);
+        foreach (var proj in _avoidProjs)
+            if (!_phaseQuery.TryComp(proj, out var phase) || phase.SourceGrid != ctx.ShipUid)
+                _avoidPotentialEnts.Add((proj, false));
 
-            comp.CachedScanCandidates.Clear();
-            foreach (var grid in _avoidGrids)
-                comp.CachedScanCandidates.Add((grid.Owner, true));
-
-            foreach (var proj in _avoidProjs)
-                if (!_phaseQuery.TryComp(proj, out var phase) || phase.SourceGrid != ctx.ShipUid)
-                    comp.CachedScanCandidates.Add((proj.Owner, false));
-        }
-
-        // Refresh AABBs/positions from cached UIDs every tick. Stale entries are pruned in-place.
         _avoidEnts.Clear();
-        for (var i = comp.CachedScanCandidates.Count - 1; i >= 0; i--)
+        foreach (var (ent, isGrid) in _avoidPotentialEnts)
         {
-            var (ent, isGrid) = comp.CachedScanCandidates[i];
-
-            // drop ourselves, target, deleted, no-physics
-            if (ent == ctx.ShipUid || ent == ctx.TargetUid || ent == ctx.TargetGridUid
-                || TerminatingOrDeleted(ent)
-                || !_physQuery.TryComp(ent, out var obstacleBody))
-            {
-                comp.CachedScanCandidates.RemoveAt(i);
+            // don't avoid ourselves or the target
+            if (ent == ctx.ShipUid || ent == ctx.TargetUid || ent == ctx.TargetGridUid || !_physQuery.TryComp(ent, out var obstacleBody))
                 continue;
-            }
 
             var otherXform = Transform(ent);
             _gridQuery.TryComp(ent, out var obsGrid);
@@ -386,6 +368,7 @@ public sealed partial class ShipSteeringSystem : EntitySystem
 
             _avoidEnts.Add(new((ent, otherXform, obstacleBody), obsPos, obsRadius, threat));
         }
+
     }
 
     private record struct AvoidanceResult(Vector2? AvoidVec, bool AllBad);
