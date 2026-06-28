@@ -15,6 +15,7 @@ using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
+using Robust.Shared.Physics.Components; // Mono
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
@@ -240,25 +241,40 @@ namespace Content.Server.NPC.Systems
                 if (_mobState.IsIncapacitated(npcUid))
                     continue;
 
-                var minDistance = htn.SleepPlayerCheckRangeOverride ?? _playerPauseDistance; // Mono
-
                 var npcCoords = npcTransform.Coordinates;
                 var hasNearbyPlayer = false;
                 var nearestDistance = float.MaxValue;
 
-                // Forge-Change-Start
+                var minDistance = htn.SleepPlayerCheckRangeOverride ?? _playerPauseDistance; // Mono
+                // Mono
+                if (htn.SleepMaxGridSpeed is { } ms
+                    && TryComp<PhysicsComponent>(npcTransform.GridUid, out var gridBody)
+                    && gridBody.LinearVelocity.Length() > ms
+                    )
+                    hasNearbyPlayer = true;
+
                 // Check distance to all players.
-                foreach (var playerCoords in _cachedPlayerCoordinates)
+                if (!hasNearbyPlayer)
                 {
-                    if (!npcCoords.TryDistance(EntityManager, playerCoords, out var distance))
-                        continue;
-
-                    nearestDistance = Math.Min(nearestDistance, distance);
-
-                    if (distance <= minDistance)
+                    var allPlayerData = _playerManager.GetAllPlayerData();
+                    foreach (var playerData in allPlayerData)
                     {
-                        hasNearbyPlayer = true;
-                        break;
+                        var exists = _playerManager.TryGetSessionById(playerData.UserId, out var session);
+
+                        if (!exists || session == null
+                            || session.AttachedEntity is not { Valid: true } playerEnt
+                            || HasComp<GhostComponent>(playerEnt)
+                            || TryComp<MobStateComponent>(playerEnt, out var state) && state.CurrentState != MobState.Alive)
+                            continue;
+
+                        var playerCoords = Transform(playerEnt).Coordinates;
+
+                        if (npcCoords.TryDistance(EntityManager, playerCoords, out var distance) &&
+                            distance <= minDistance)
+                        {
+                            hasNearbyPlayer = true;
+                            break;
+                        }
                     }
                 }
                 // Forge-Change-End

@@ -4,16 +4,17 @@
   description: job-description-ussp-sergeant
   playTimeTracker: JobUSSPSergeant
   requirements:
-  - !type:DepartmentTimeRequirement
-    department: UnionOfSovietSocialistPlanets
-    time: 54000 # 15 hours
+  # - !type:DepartmentTimeRequirement # Disabled until newgens get hours in
+  #   department: UnionOfSovietSocialistPlanets
+  #   time: 18000 # 5 hours
   - !type:OverallPlaytimeRequirement
     time: 72000 # 20 hrs
   startingGear: USSPSergeantGear
   alwaysUseSpawner: true
   hideConsoleVisibility: true
-  icon: "JobIconSeniorOfficer" # TODO - new USSP icons
+  icon: "JobIconUSSPSergeant"
   supervisors: job-supervisors-ussp-commissars
+  assignedCompany: USSP
   canBeAntag: false
  # guides: [ BasicLore, UnitedSovietSocialistPlanets ] # Forge-Change-delete
   weight: 30
@@ -21,7 +22,7 @@
   assignedCompany: USSP # Forge-Change: added assigned company
   special:
   - !type:AddImplantSpecial
-    implants: [ MindShieldImplant, UsspTrackingImplant ]
+    implants: [ UsspTrackingImplant ]
   - !type:AddComponentSpecial
     components:
     - type: MailDisabled
@@ -47,3 +48,4 @@
   storage:
     back:
     - RadioHandheldNF
+    - BookUSSPLaw

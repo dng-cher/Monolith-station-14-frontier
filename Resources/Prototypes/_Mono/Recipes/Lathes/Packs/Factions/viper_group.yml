@@ -10,3 +10,8 @@
   - ClothingOuterHardsuitViperGroupMedic
   - ClothingOuterHardsuitViperGroupJuggernaut
   - ClothingShoesBootsMagViperGroup # Forge-change
+
+- type: latheRecipePack
+  id: MonoViperGroupStatic
+  recipes:
+  - VGTechfabMachineCircuitboard

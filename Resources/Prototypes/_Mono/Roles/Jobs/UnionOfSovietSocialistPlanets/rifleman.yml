@@ -9,8 +9,9 @@
   startingGear: USSPRiflemanGear
   alwaysUseSpawner: true
   hideConsoleVisibility: true
-  icon: "JobIconSecurityCadet" # TODO - new USSP icons
+  icon: "JobIconUSSPRifleman"
   supervisors: job-supervisors-ussp-sergeant
+  assignedCompany: USSP
   canBeAntag: false
  # guides: [ BasicLore, UnitedSovietSocialistPlanets ] # Forge-Change-delete
   weight: 10
@@ -18,7 +19,7 @@
   assignedCompany: USSP # Forge-Change: added assigned company
   special:
   - !type:AddImplantSpecial
-    implants: [ MindShieldImplant, UsspTrackingImplant ]
+    implants: [ UsspTrackingImplant ]
   - !type:AddComponentSpecial
     components:
     - type: MailDisabled
@@ -44,3 +45,4 @@
   storage:
     back:
     - RadioHandheldNF
+    - BookUSSPLaw

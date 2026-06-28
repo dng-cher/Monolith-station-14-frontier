@@ -29,7 +29,7 @@
         description: "Outdated, yet still reliable."
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Buran MIL{1}'
+          mapNameTemplate: 'Buran USSP{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'
