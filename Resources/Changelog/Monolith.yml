@@ -22234,3 +22234,12 @@ Entries:
   id: 2457
   time: '2026-07-07T00:26:30.0000000+00:00'
   url: https://github.com/Monolith-Station/Monolith/pull/4228
+- author: EldritchPineapple
+  changes:
+    - type: Tweak
+      message: Changed Dymere's projectile speed (buffed) and lifetime (reduced)
+    - type: Tweak
+      message: altair can now fire its main cannonade entirely frontally
+  id: 2458
+  time: '2026-07-07T00:30:49.0000000+00:00'
+  url: https://github.com/Monolith-Station/Monolith/pull/4219
