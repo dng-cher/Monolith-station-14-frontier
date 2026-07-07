@@ -22227,3 +22227,10 @@ Entries:
   id: 2456
   time: '2026-07-06T23:14:02.0000000+00:00'
   url: https://github.com/Monolith-Station/Monolith/pull/4235
+- author: EldritchPineapple
+  changes:
+    - type: Tweak
+      message: jaguar had internals updated to better match tsf ships
+  id: 2457
+  time: '2026-07-07T00:26:30.0000000+00:00'
+  url: https://github.com/Monolith-Station/Monolith/pull/4228
