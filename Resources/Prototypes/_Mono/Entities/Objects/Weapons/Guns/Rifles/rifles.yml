@@ -609,7 +609,7 @@
     maxAngle: 58
     angleIncrease: 1.5
     angleDecay: 20
-    fireRate: 7
+    fireRate: 9
     selectedMode: FullAuto
     damageModifier: 0.95 # Brings it down to 152.95 DPS from 161 DPS (assuming perfect accuracy with FMJ on an unarmored target); Lecter has less DPS, but Lecter also has really fucking good accuracy and is free roundstart.
     availableModes:
