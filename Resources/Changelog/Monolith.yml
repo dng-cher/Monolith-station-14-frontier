@@ -22310,3 +22310,17 @@ Entries:
   id: 2466
   time: '2026-07-08T20:51:11.0000000+00:00'
   url: https://github.com/Monolith-Station/Monolith/pull/4243
+- author: kasature90
+  changes:
+    - type: Tweak
+      message: >-
+        Shenzhen now has a forced laser pointer, 2x DU cost (1 unit for a mag,
+        1.2 for the gun itself), and is now 120 pierce with 0.8 AP instead of
+        180 pierce with no AP.
+    - type: Fix
+      message: Fixed laser pointers for guns not working.
+    - type: Fix
+      message: Fixed Shenzhen's projectile going through glass doors.
+  id: 2467
+  time: '2026-07-08T20:53:47.0000000+00:00'
+  url: https://github.com/Monolith-Station/Monolith/pull/4213
