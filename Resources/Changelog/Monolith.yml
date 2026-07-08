@@ -22303,3 +22303,10 @@ Entries:
   id: 2465
   time: '2026-07-08T15:58:03.0000000+00:00'
   url: https://github.com/Monolith-Station/Monolith/pull/4246
+- author: kasature90
+  changes:
+    - type: Tweak
+      message: Changed Annie sprite to not look so much like Lecter.
+  id: 2466
+  time: '2026-07-08T20:51:11.0000000+00:00'
+  url: https://github.com/Monolith-Station/Monolith/pull/4243
