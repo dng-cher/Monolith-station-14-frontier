@@ -26,7 +26,7 @@
 - type: gameMap
   id: Svinya
   mapName: 'Svinya'
-  mapPath: /Maps/_Mono/Shuttles/USSP/svinya.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/USSP/svinya.yml
   minPlayers: 0
   stations:
     Svinya:

@@ -250,21 +250,22 @@
   - type: Sprite
     sprite: _Mono/Structures/Machines/techfab.rsi
     layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
     - state: techfab-ussp
-      map: [ "enum.LatheVisualLayers.IsRunning" ]
     - state: unlit
       shader: unshaded
-      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
     - state: inserting
-      map: [ "enum.MaterialStorageVisualLayers.Inserting" ]
+      map: ["enum.MaterialStorageVisualLayers.Inserting"]
     - state: panel
-      map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: Machine
     board: USSPTechfabMachineCircuitboard
   - type: Lathe
     producingSound: /Audio/Machines/circuitprinter.ogg
-    idleState: techfab-ussp
-    runningState: techfab-ussp
+    idleState: icon
+    runningState: icon
     staticPacks:
     - StaticAmmoRecipePack
     - NFMercenaryTechfabDeprecatedStatic
@@ -276,6 +277,7 @@
     - MonoUSSPArmorDynamic
     - MonoUSSPMiscDynamic
     - MonoUSSPWeaponsDynamicRanged
+    - MonoUSSPVouchersDynamic
     # Universal shit (stuff like shipgun ammo)
     - UniversalRailgunAmmo
     - UniversalMissileAmmo
@@ -311,11 +313,12 @@
   - type: Sprite
     sprite: _Mono/Structures/Machines/techfab.rsi
     layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
     - state: techfab-viper
-      map: [ "enum.LatheVisualLayers.IsRunning" ]
     - state: unlit
       shader: unshaded
-      map: [ "enum.PowerDeviceVisualLayers.Powered"]
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
     - state: inserting
       map: ["enum.MaterialStorageVisualLayers.Inserting"]
     - state: panel
@@ -324,8 +327,8 @@
     board: VGTechfabMachineCircuitboard
   - type: Lathe
     producingSound: /Audio/Machines/circuitprinter.ogg
-    idleState: techfab-viper
-    runningState: techfab-viper
+    idleState: icon
+    runningState: icon
     staticPacks:
     - StaticAmmoRecipePack
     - NFMercenaryTechfabDeprecatedStatic
