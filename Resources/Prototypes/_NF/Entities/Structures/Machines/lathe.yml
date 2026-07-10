@@ -223,6 +223,7 @@
     - UniversalOrdinance
     - SecurityEquipment
     - SmartGun #Smart SMG
+    - NSCRecipes # Forge-Change
     # Mono end
     - UllmanForgeRecipes # Forge-change
   - type: EmagLatheRecipes

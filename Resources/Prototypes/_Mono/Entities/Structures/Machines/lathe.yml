@@ -68,6 +68,7 @@
     - ResearchedExplosives
     - SecurityEquipment
     - SmartGun
+    - NSCRecipes # Forge-Change
   - type: MaterialStorage
     whitelist:
       tags:
