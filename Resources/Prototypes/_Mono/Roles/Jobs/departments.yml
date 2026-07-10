@@ -20,6 +20,7 @@
   - USSPSergeant
   - USSPRifleman
   primary: false
+  editorHidden: true
 
 - type: department
   id: ViperGroup
@@ -32,4 +33,4 @@
   - VGLieutenant
   - VGCommander
   primary: false
-  editorHidden: false
+  editorHidden: true

@@ -3,6 +3,7 @@
   name: job-name-vg-commander
   description: job-description-vg-commander
   playTimeTracker: JobVGCommander
+  setPreference: false
   whitelisted: true # I'm not certain who gets this.
   startingGear: ViperRadioGear
   alwaysUseSpawner: true

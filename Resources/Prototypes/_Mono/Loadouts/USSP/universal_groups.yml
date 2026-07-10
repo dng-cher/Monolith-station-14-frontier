@@ -182,29 +182,33 @@
   fallbacks:
   - USSPCommonCause
 
-- type: loadoutGroup
+- type: loadoutGroup # ONLY TO BE USED AS A SUBGROUP FOR _NF MERCENARY GROUPS
   id: MonoUSSPJumpsuit
   name: loadout-group-contractor-jumpsuit
+  loadouts: []
   subgroups:
   - USSPJumpsuit
   - USSPJumpsuitOfficer
 
-- type: loadoutGroup
+- type: loadoutGroup # ONLY TO BE USED AS A SUBGROUP FOR _NF MERCENARY GROUPS
   id: MonoUSSPBackpack
   name: loadout-group-contractor-backpack
+  loadouts: []
   subgroups:
   - USSPBackpack
 
-- type: loadoutGroup
+- type: loadoutGroup # ONLY TO BE USED AS A SUBGROUP FOR _NF MERCENARY GROUPS
   id: MonoUSSPOuterClothing
   name: loadout-group-contractor-outerclothing
+  loadouts: []
   subgroups:
   - USSPOuterClothing
   - USSPOuterClothingOfficer
 
-- type: loadoutGroup
+- type: loadoutGroup # ONLY TO BE USED AS A SUBGROUP FOR _NF MERCENARY GROUPS
   id: MonoUSSPHead
   name: loadout-group-contractor-head
+  loadouts: []
   subgroups:
   - USSPHead
   - USSPHeadOfficer

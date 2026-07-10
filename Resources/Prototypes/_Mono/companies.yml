@@ -140,6 +140,10 @@
   - !type:GiveItemSpecial
     prototype:
     - EncryptionKeyUssp
+  - !type:AddAccessSpecial
+    # Temporary: full shipyard purchase access for testing/balance pass.
+    tags:
+    - USSP
   - !type:PlaySpawnSoundSpecial
     sound:
       path: /Audio/Ambience/Antag/headrev_start.ogg
@@ -317,10 +321,16 @@
   # Forge-change: delete logins, add icon, note & special's
   note: viper-group-company-note
   icon: ViperGroup
+  whitelisted: true
+  hidden: true # Forge-change: hide
   special:
   - !type:GiveItemSpecial
     prototype:
     - EncryptionKeyViperGroup
+  - !type:AddAccessSpecial
+    # Temporary: full shipyard purchase access for testing/balance pass.
+    tags:
+    - Viper
   - !type:PlaySpawnSoundSpecial
     sound:
       path: /Audio/_Forge/Ambience/Antag/cut_reaper_spawn.ogg

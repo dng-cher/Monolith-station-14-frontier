@@ -28,6 +28,7 @@
   id: CargoBoards
   recipes:
   - OreProcessorIndustrialMachineCircuitboard
+  - ShipDrillMachineCircuitboard # Mono
   - OreMagnetMachineCircuitboard # Mono
   # - CargoTelepadMachineCircuitboard # Frontier
   - ShuttleGunKineticCircuitboard

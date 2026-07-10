@@ -200,8 +200,6 @@
         type: AgentIDCardBoundUserInterface
       enum.ChameleonUiKey.Key:
         type: ChameleonBoundUserInterface
-  - type: Contraband # Frontier
-    hideValues: true # Frontier
 
 #MARK: Viper Group
 - type: entity

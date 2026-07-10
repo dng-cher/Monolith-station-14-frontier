@@ -3,6 +3,7 @@
   name: job-name-vg-infanteer
   description: job-description-vg-infanteer
   playTimeTracker: JobVGInfanteer
+  setPreference: false
   whitelisted: true # Everyone who has the company whitelist, I'd assume.
   startingGear: ViperRadioGear
   alwaysUseSpawner: true

@@ -3,6 +3,7 @@
   name: job-name-vg-lieutenant
   description: job-description-vg-lieutenant
   playTimeTracker: JobVGLieutenant
+  setPreference: false
   whitelisted: true # For Lieutenants and such.
   startingGear: ViperRadioGear
   alwaysUseSpawner: true
