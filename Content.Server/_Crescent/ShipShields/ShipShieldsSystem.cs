@@ -111,6 +111,7 @@ public sealed partial class ShipShieldsSystem : EntitySystem
             if (parent == null)
                 continue;
 
+            var filter = _station.GetInOwningStation(uid);
 
             if (emitter.Damage > emitter.DamageLimit)
             {

@@ -181,3 +181,31 @@
   - USSPFolder
   fallbacks:
   - USSPCommonCause
+
+- type: loadoutGroup
+  id: MonoUSSPJumpsuit
+  name: loadout-group-contractor-jumpsuit
+  subgroups:
+  - USSPJumpsuit
+  - USSPJumpsuitOfficer
+
+- type: loadoutGroup
+  id: MonoUSSPBackpack
+  name: loadout-group-contractor-backpack
+  subgroups:
+  - USSPBackpack
+
+- type: loadoutGroup
+  id: MonoUSSPOuterClothing
+  name: loadout-group-contractor-outerclothing
+  subgroups:
+  - USSPOuterClothing
+  - USSPOuterClothingOfficer
+
+- type: loadoutGroup
+  id: MonoUSSPHead
+  name: loadout-group-contractor-head
+  subgroups:
+  - USSPHead
+  - USSPHeadOfficer
+  - USSPHeadCommissar

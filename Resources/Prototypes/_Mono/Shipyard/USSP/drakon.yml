@@ -9,7 +9,7 @@
   category: Medium
   group: Shipyard # Forge-change: Ussp to Shipyard
   access: Mercenary
-  shuttlePath: /Maps/_Mono/Shuttles/USSP/drakon.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/USSP/drakon.yml
   guidebookPage: Null
   class:
   - Destroyer

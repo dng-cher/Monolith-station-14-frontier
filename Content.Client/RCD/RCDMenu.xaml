@@ -48,8 +48,6 @@
         </ui:RadialMenuTextureButtonWithSector>
         
     </ui:RadialContainer>
-
-    </ui:RadialContainer>
     
     <!-- Walls and flooring -->
     <ui:RadialContainer Name="WallsAndFlooring"  VerticalExpand="True" HorizontalExpand="True" InitialRadius="100"/>

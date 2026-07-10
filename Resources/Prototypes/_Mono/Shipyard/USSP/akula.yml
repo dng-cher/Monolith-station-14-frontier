@@ -9,7 +9,7 @@
   category: Small
   group: Shipyard # Forge-change: Ussp to Shipyard
   access: Mercenary
-  shuttlePath: /Maps/_Mono/Shuttles/USSP/akula.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/USSP/akula.yml
   guidebookPage: Null
   class:
   - Fighter

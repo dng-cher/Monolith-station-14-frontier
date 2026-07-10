@@ -14,7 +14,7 @@
   category: Small
   group: Shipyard # Forge-change: Ussp to Shipyard
   access: Mercenary
-  shuttlePath: /Maps/_Mono/Shuttles/USSP/svinya.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/USSP/svinya.yml
   guidebookPage: Null
   class:
   - Fighter

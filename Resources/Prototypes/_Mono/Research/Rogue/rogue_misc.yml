@@ -20,7 +20,7 @@
   id: PdvTierTwoVouchers
   name: research-technology-rogue-tier-two-vouchers
   entityIcon: ShipVoucherPdvT2
-  discipline: RogueShipyard
+  discipline: Pdv
   tier: 1
   cost: 60000
   recipeUnlocks:
